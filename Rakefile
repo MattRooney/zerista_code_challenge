@@ -9,6 +9,9 @@ task :import => :environment do
   csv = File.read('test_events.csv')
   parsed_csv = CSV.parse(csv, :headers => true)
   parsed_csv.each do |row|
-    Session.create!(row.to_hash)
+    track = Track.find_or_create_by!(name: row["track"])
+    session_hash = row.to_hash.slice("start", "finish", "name")
+    session_hash["track_id"] = track.id
+    Session.create!(session_hash)
   end
 end

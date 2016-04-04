@@ -4,7 +4,6 @@ class CreateSessions < ActiveRecord::Migration
       t.datetime :start
       t.datetime :finish
       t.string :name
-      t.string :track
 
       t.timestamps null: false
     end

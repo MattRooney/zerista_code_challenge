@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404160031) do
+ActiveRecord::Schema.define(version: 20160404191307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,22 @@ ActiveRecord::Schema.define(version: 20160404160031) do
     t.datetime "start"
     t.datetime "finish"
     t.string   "name"
-    t.string   "track"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "track_id"
+  end
+
+  add_index "sessions", ["track_id"], name: "index_sessions_on_track_id", using: :btree
+
+  create_table "tracks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "tracks", ["session_id"], name: "index_tracks_on_session_id", using: :btree
+
+  add_foreign_key "sessions", "tracks"
+  add_foreign_key "tracks", "sessions"
 end
