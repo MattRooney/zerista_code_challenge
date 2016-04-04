@@ -1,0 +1,21 @@
+<table class="bordered highlight">
+  <thead>
+    <tr>
+        <th data-field="start-time">Start Time</th>
+        <th data-field="finish-time">Finish Time</th>
+        <th data-field="name">Name</th>
+        <th data-field="track">Track</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.start_time %></td>
+        <td><%= session.finish_time %></td>
+        <td><%= session.name %></td>
+        <td><%= session.track %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
