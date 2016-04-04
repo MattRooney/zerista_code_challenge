@@ -5,11 +5,11 @@ class SessionsController < ApplicationController
   end
 
   def tuesday
-    @sessions = Session.first(2)
+    @sessions = Session.where("start < ?", "9/12/2015")
   end
 
   def wednesday
-    @sessions = Session.last(2)
+    @sessions = Session.where("start > ?", "9/12/2015")
   end
 
 end
